@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="digitalretailersincModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="cart">
+    <Key>
+      <PropertyRef Name="cart_id" />
+    </Key>
+    <Property Name="cart_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="laptop_id" Type="Int32" />
+    <Property Name="member_id" Type="Int32" />
+    <Property Name="cart_status_id" Type="Int32" />
+    <NavigationProperty Name="laptop" Relationship="Self.FK__cart__laptop_id__5812160E" FromRole="cart" ToRole="laptop" />
+  </EntityType>
+  <EntityType Name="cart_status">
+    <Key>
+      <PropertyRef Name="cart_status_id" />
+    </Key>
+    <Property Name="cart_status_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="is_cart_status" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="laptop">
+    <Key>
+      <PropertyRef Name="laptop_id" />
+    </Key>
+    <Property Name="laptop_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="laptop_name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="is_active" Type="Boolean" />
+    <Property Name="is_delete" Type="Boolean" />
+    <Property Name="laptop_image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="quantity" Type="Int32" />
+    <NavigationProperty Name="carts" Relationship="Self.FK__cart__laptop_id__5812160E" FromRole="laptop" ToRole="cart" />
+    <Property Name="price" Type="Decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="member">
+    <Key>
+      <PropertyRef Name="member_id" />
+    </Key>
+    <Property Name="member_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="first_name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="last_name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="email" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="pass" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="is_active" Type="Boolean" />
+    <Property Name="is_delete" Type="Boolean" />
+    <NavigationProperty Name="shipping_details" Relationship="Self.FK__shipping___membe__52593CB8" FromRole="member" ToRole="shipping_details" />
+  </EntityType>
+  <EntityType Name="member_role">
+    <Key>
+      <PropertyRef Name="member_role_id" />
+    </Key>
+    <Property Name="member_role_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="member_id" Type="Int32" />
+    <Property Name="role_id" Type="Int32" />
+  </EntityType>
+  <EntityType Name="role">
+    <Key>
+      <PropertyRef Name="role_id" />
+    </Key>
+    <Property Name="role_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="role_name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="shipping_details">
+    <Key>
+      <PropertyRef Name="shipping_detail_id" />
+    </Key>
+    <Property Name="shipping_detail_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="member_id" Type="Int32" />
+    <Property Name="adress" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="city" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="state_is" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="zipcode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="order_id" Type="Int32" />
+    <Property Name="amount_paid" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="member" Relationship="Self.FK__shipping___membe__52593CB8" FromRole="shipping_details" ToRole="member" />
+  </EntityType>
+  <EntityType Name="slide_image">
+    <Key>
+      <PropertyRef Name="slide_id" />
+    </Key>
+    <Property Name="slide_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="slide_title" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="slide_image1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK__cart__laptop_id__5812160E">
+    <End Role="laptop" Type="Self.laptop" Multiplicity="0..1" />
+    <End Role="cart" Type="Self.cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="laptop">
+        <PropertyRef Name="laptop_id" />
+      </Principal>
+      <Dependent Role="cart">
+        <PropertyRef Name="laptop_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__shipping___membe__52593CB8">
+    <End Role="member" Type="Self.member" Multiplicity="0..1" />
+    <End Role="shipping_details" Type="Self.shipping_details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="member">
+        <PropertyRef Name="member_id" />
+      </Principal>
+      <Dependent Role="shipping_details">
+        <PropertyRef Name="member_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="digitalretailersincEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="carts" EntityType="Self.cart" />
+    <EntitySet Name="cart_status" EntityType="Self.cart_status" />
+    <EntitySet Name="laptops" EntityType="Self.laptop" />
+    <EntitySet Name="members" EntityType="Self.member" />
+    <EntitySet Name="member_role" EntityType="Self.member_role" />
+    <EntitySet Name="roles" EntityType="Self.role" />
+    <EntitySet Name="shipping_details" EntityType="Self.shipping_details" />
+    <EntitySet Name="slide_image" EntityType="Self.slide_image" />
+    <AssociationSet Name="FK__cart__laptop_id__5812160E" Association="Self.FK__cart__laptop_id__5812160E">
+      <End Role="laptop" EntitySet="laptops" />
+      <End Role="cart" EntitySet="carts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__shipping___membe__52593CB8" Association="Self.FK__shipping___membe__52593CB8">
+      <End Role="member" EntitySet="members" />
+      <End Role="shipping_details" EntitySet="shipping_details" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

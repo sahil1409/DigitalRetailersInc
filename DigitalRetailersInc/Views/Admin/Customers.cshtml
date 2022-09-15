@@ -1,0 +1,39 @@
+﻿@model IEnumerable<DigitalRetailersInc.DAL.member>
+@{
+    ViewBag.Title = "Customers";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="card mb-3">
+    <div class="card-header">
+        <i class="fas fa-table"></i>Customers
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Sr. No.</th>
+                        <th>Customer</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{int count = 1;}
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@count</td>
+                            <td>@item.first_name @item.last_name</td>
+                            <td>
+                                @Html.ActionLink("Edit", "CustomerEdit", new { member_id = item.member_id })
+                            </td>
+                        </tr>
+                        count++;
+                    }
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>

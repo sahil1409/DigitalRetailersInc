@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="digitalretailersincModelStoreContainer" CdmEntityContainer="digitalretailersincEntities">
+    <EntitySetMapping Name="carts">
+      <EntityTypeMapping TypeName="digitalretailersincModel.cart">
+        <MappingFragment StoreEntitySet="cart">
+          <ScalarProperty Name="cart_id" ColumnName="cart_id" />
+          <ScalarProperty Name="laptop_id" ColumnName="laptop_id" />
+          <ScalarProperty Name="member_id" ColumnName="member_id" />
+          <ScalarProperty Name="cart_status_id" ColumnName="cart_status_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="cart_status">
+      <EntityTypeMapping TypeName="digitalretailersincModel.cart_status">
+        <MappingFragment StoreEntitySet="cart_status">
+          <ScalarProperty Name="cart_status_id" ColumnName="cart_status_id" />
+          <ScalarProperty Name="is_cart_status" ColumnName="is_cart_status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="laptops">
+      <EntityTypeMapping TypeName="digitalretailersincModel.laptop">
+        <MappingFragment StoreEntitySet="laptop">
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="laptop_id" ColumnName="laptop_id" />
+          <ScalarProperty Name="laptop_name" ColumnName="laptop_name" />
+          <ScalarProperty Name="is_active" ColumnName="is_active" />
+          <ScalarProperty Name="is_delete" ColumnName="is_delete" />
+          <ScalarProperty Name="laptop_image" ColumnName="laptop_image" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="members">
+      <EntityTypeMapping TypeName="digitalretailersincModel.member">
+        <MappingFragment StoreEntitySet="member">
+          <ScalarProperty Name="member_id" ColumnName="member_id" />
+          <ScalarProperty Name="first_name" ColumnName="first_name" />
+          <ScalarProperty Name="last_name" ColumnName="last_name" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="pass" ColumnName="pass" />
+          <ScalarProperty Name="is_active" ColumnName="is_active" />
+          <ScalarProperty Name="is_delete" ColumnName="is_delete" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="member_role">
+      <EntityTypeMapping TypeName="digitalretailersincModel.member_role">
+        <MappingFragment StoreEntitySet="member_role">
+          <ScalarProperty Name="member_role_id" ColumnName="member_role_id" />
+          <ScalarProperty Name="member_id" ColumnName="member_id" />
+          <ScalarProperty Name="role_id" ColumnName="role_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="roles">
+      <EntityTypeMapping TypeName="digitalretailersincModel.role">
+        <MappingFragment StoreEntitySet="role">
+          <ScalarProperty Name="role_id" ColumnName="role_id" />
+          <ScalarProperty Name="role_name" ColumnName="role_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="shipping_details">
+      <EntityTypeMapping TypeName="digitalretailersincModel.shipping_details">
+        <MappingFragment StoreEntitySet="shipping_details">
+          <ScalarProperty Name="shipping_detail_id" ColumnName="shipping_detail_id" />
+          <ScalarProperty Name="member_id" ColumnName="member_id" />
+          <ScalarProperty Name="adress" ColumnName="adress" />
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="state_is" ColumnName="state_is" />
+          <ScalarProperty Name="country" ColumnName="country" />
+          <ScalarProperty Name="zipcode" ColumnName="zipcode" />
+          <ScalarProperty Name="order_id" ColumnName="order_id" />
+          <ScalarProperty Name="amount_paid" ColumnName="amount_paid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="slide_image">
+      <EntityTypeMapping TypeName="digitalretailersincModel.slide_image">
+        <MappingFragment StoreEntitySet="slide_image">
+          <ScalarProperty Name="slide_id" ColumnName="slide_id" />
+          <ScalarProperty Name="slide_title" ColumnName="slide_title" />
+          <ScalarProperty Name="slide_image1" ColumnName="slide_image1" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

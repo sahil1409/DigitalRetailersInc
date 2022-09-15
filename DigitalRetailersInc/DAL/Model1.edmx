@@ -1,0 +1,368 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="digitalretailersincModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="cart">
+          <Key>
+            <PropertyRef Name="cart_id" />
+          </Key>
+          <Property Name="cart_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="laptop_id" Type="int" />
+          <Property Name="member_id" Type="int" />
+          <Property Name="cart_status_id" Type="int" />
+        </EntityType>
+        <EntityType Name="cart_status">
+          <Key>
+            <PropertyRef Name="cart_status_id" />
+          </Key>
+          <Property Name="cart_status_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="is_cart_status" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="laptop">
+          <Key>
+            <PropertyRef Name="laptop_id" />
+          </Key>
+          <Property Name="laptop_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="laptop_name" Type="varchar" MaxLength="500" />
+          <Property Name="is_active" Type="bit" />
+          <Property Name="is_delete" Type="bit" />
+          <Property Name="laptop_image" Type="varchar(max)" />
+          <Property Name="quantity" Type="int" />
+          <Property Name="price" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="member">
+          <Key>
+            <PropertyRef Name="member_id" />
+          </Key>
+          <Property Name="member_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="first_name" Type="varchar" MaxLength="200" />
+          <Property Name="last_name" Type="varchar" MaxLength="200" />
+          <Property Name="email" Type="varchar" MaxLength="200" />
+          <Property Name="pass" Type="varchar" MaxLength="200" />
+          <Property Name="is_active" Type="bit" />
+          <Property Name="is_delete" Type="bit" />
+        </EntityType>
+        <EntityType Name="member_role">
+          <Key>
+            <PropertyRef Name="member_role_id" />
+          </Key>
+          <Property Name="member_role_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="member_id" Type="int" />
+          <Property Name="role_id" Type="int" />
+        </EntityType>
+        <EntityType Name="role">
+          <Key>
+            <PropertyRef Name="role_id" />
+          </Key>
+          <Property Name="role_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="role_name" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="shipping_details">
+          <Key>
+            <PropertyRef Name="shipping_detail_id" />
+          </Key>
+          <Property Name="shipping_detail_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="member_id" Type="int" />
+          <Property Name="adress" Type="varchar" MaxLength="500" />
+          <Property Name="city" Type="varchar" MaxLength="500" />
+          <Property Name="state_is" Type="varchar" MaxLength="500" />
+          <Property Name="country" Type="varchar" MaxLength="50" />
+          <Property Name="zipcode" Type="varchar" MaxLength="50" />
+          <Property Name="order_id" Type="int" />
+          <Property Name="amount_paid" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="slide_image">
+          <Key>
+            <PropertyRef Name="slide_id" />
+          </Key>
+          <Property Name="slide_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="slide_title" Type="varchar" MaxLength="500" />
+          <Property Name="slide_image1" Type="varchar(max)" />
+        </EntityType>
+        <Association Name="FK__cart__laptop_id__5812160E">
+          <End Role="laptop" Type="Self.laptop" Multiplicity="0..1" />
+          <End Role="cart" Type="Self.cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="laptop">
+              <PropertyRef Name="laptop_id" />
+            </Principal>
+            <Dependent Role="cart">
+              <PropertyRef Name="laptop_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__shipping___membe__52593CB8">
+          <End Role="member" Type="Self.member" Multiplicity="0..1" />
+          <End Role="shipping_details" Type="Self.shipping_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="member_id" />
+            </Principal>
+            <Dependent Role="shipping_details">
+              <PropertyRef Name="member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="digitalretailersincModelStoreContainer">
+          <EntitySet Name="cart" EntityType="Self.cart" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cart_status" EntityType="Self.cart_status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="laptop" EntityType="Self.laptop" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="member" EntityType="Self.member" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="member_role" EntityType="Self.member_role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="role" EntityType="Self.role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="shipping_details" EntityType="Self.shipping_details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="slide_image" EntityType="Self.slide_image" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__cart__laptop_id__5812160E" Association="Self.FK__cart__laptop_id__5812160E">
+            <End Role="laptop" EntitySet="laptop" />
+            <End Role="cart" EntitySet="cart" />
+          </AssociationSet>
+          <AssociationSet Name="FK__shipping___membe__52593CB8" Association="Self.FK__shipping___membe__52593CB8">
+            <End Role="member" EntitySet="member" />
+            <End Role="shipping_details" EntitySet="shipping_details" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="digitalretailersincModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="cart">
+          <Key>
+            <PropertyRef Name="cart_id" />
+          </Key>
+          <Property Name="cart_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="laptop_id" Type="Int32" />
+          <Property Name="member_id" Type="Int32" />
+          <Property Name="cart_status_id" Type="Int32" />
+          <NavigationProperty Name="laptop" Relationship="Self.FK__cart__laptop_id__5812160E" FromRole="cart" ToRole="laptop" />
+        </EntityType>
+        <EntityType Name="cart_status">
+          <Key>
+            <PropertyRef Name="cart_status_id" />
+          </Key>
+          <Property Name="cart_status_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="is_cart_status" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="laptop">
+          <Key>
+            <PropertyRef Name="laptop_id" />
+          </Key>
+          <Property Name="laptop_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="laptop_name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="is_active" Type="Boolean" />
+          <Property Name="is_delete" Type="Boolean" />
+          <Property Name="laptop_image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="quantity" Type="Int32" />
+          <NavigationProperty Name="carts" Relationship="Self.FK__cart__laptop_id__5812160E" FromRole="laptop" ToRole="cart" />
+          <Property Name="price" Type="Decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="member">
+          <Key>
+            <PropertyRef Name="member_id" />
+          </Key>
+          <Property Name="member_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="first_name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="last_name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="pass" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="is_active" Type="Boolean" />
+          <Property Name="is_delete" Type="Boolean" />
+          <NavigationProperty Name="shipping_details" Relationship="Self.FK__shipping___membe__52593CB8" FromRole="member" ToRole="shipping_details" />
+        </EntityType>
+        <EntityType Name="member_role">
+          <Key>
+            <PropertyRef Name="member_role_id" />
+          </Key>
+          <Property Name="member_role_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="member_id" Type="Int32" />
+          <Property Name="role_id" Type="Int32" />
+        </EntityType>
+        <EntityType Name="role">
+          <Key>
+            <PropertyRef Name="role_id" />
+          </Key>
+          <Property Name="role_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="role_name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="shipping_details">
+          <Key>
+            <PropertyRef Name="shipping_detail_id" />
+          </Key>
+          <Property Name="shipping_detail_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="member_id" Type="Int32" />
+          <Property Name="adress" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="city" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="state_is" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="zipcode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="order_id" Type="Int32" />
+          <Property Name="amount_paid" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="member" Relationship="Self.FK__shipping___membe__52593CB8" FromRole="shipping_details" ToRole="member" />
+        </EntityType>
+        <EntityType Name="slide_image">
+          <Key>
+            <PropertyRef Name="slide_id" />
+          </Key>
+          <Property Name="slide_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="slide_title" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="slide_image1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK__cart__laptop_id__5812160E">
+          <End Role="laptop" Type="Self.laptop" Multiplicity="0..1" />
+          <End Role="cart" Type="Self.cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="laptop">
+              <PropertyRef Name="laptop_id" />
+            </Principal>
+            <Dependent Role="cart">
+              <PropertyRef Name="laptop_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__shipping___membe__52593CB8">
+          <End Role="member" Type="Self.member" Multiplicity="0..1" />
+          <End Role="shipping_details" Type="Self.shipping_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="member_id" />
+            </Principal>
+            <Dependent Role="shipping_details">
+              <PropertyRef Name="member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="digitalretailersincEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="carts" EntityType="Self.cart" />
+          <EntitySet Name="cart_status" EntityType="Self.cart_status" />
+          <EntitySet Name="laptops" EntityType="Self.laptop" />
+          <EntitySet Name="members" EntityType="Self.member" />
+          <EntitySet Name="member_role" EntityType="Self.member_role" />
+          <EntitySet Name="roles" EntityType="Self.role" />
+          <EntitySet Name="shipping_details" EntityType="Self.shipping_details" />
+          <EntitySet Name="slide_image" EntityType="Self.slide_image" />
+          <AssociationSet Name="FK__cart__laptop_id__5812160E" Association="Self.FK__cart__laptop_id__5812160E">
+            <End Role="laptop" EntitySet="laptops" />
+            <End Role="cart" EntitySet="carts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__shipping___membe__52593CB8" Association="Self.FK__shipping___membe__52593CB8">
+            <End Role="member" EntitySet="members" />
+            <End Role="shipping_details" EntitySet="shipping_details" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="digitalretailersincModelStoreContainer" CdmEntityContainer="digitalretailersincEntities">
+          <EntitySetMapping Name="carts">
+            <EntityTypeMapping TypeName="digitalretailersincModel.cart">
+              <MappingFragment StoreEntitySet="cart">
+                <ScalarProperty Name="cart_id" ColumnName="cart_id" />
+                <ScalarProperty Name="laptop_id" ColumnName="laptop_id" />
+                <ScalarProperty Name="member_id" ColumnName="member_id" />
+                <ScalarProperty Name="cart_status_id" ColumnName="cart_status_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cart_status">
+            <EntityTypeMapping TypeName="digitalretailersincModel.cart_status">
+              <MappingFragment StoreEntitySet="cart_status">
+                <ScalarProperty Name="cart_status_id" ColumnName="cart_status_id" />
+                <ScalarProperty Name="is_cart_status" ColumnName="is_cart_status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="laptops">
+            <EntityTypeMapping TypeName="digitalretailersincModel.laptop">
+              <MappingFragment StoreEntitySet="laptop">
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="laptop_id" ColumnName="laptop_id" />
+                <ScalarProperty Name="laptop_name" ColumnName="laptop_name" />
+                <ScalarProperty Name="is_active" ColumnName="is_active" />
+                <ScalarProperty Name="is_delete" ColumnName="is_delete" />
+                <ScalarProperty Name="laptop_image" ColumnName="laptop_image" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="members">
+            <EntityTypeMapping TypeName="digitalretailersincModel.member">
+              <MappingFragment StoreEntitySet="member">
+                <ScalarProperty Name="member_id" ColumnName="member_id" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="pass" ColumnName="pass" />
+                <ScalarProperty Name="is_active" ColumnName="is_active" />
+                <ScalarProperty Name="is_delete" ColumnName="is_delete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="member_role">
+            <EntityTypeMapping TypeName="digitalretailersincModel.member_role">
+              <MappingFragment StoreEntitySet="member_role">
+                <ScalarProperty Name="member_role_id" ColumnName="member_role_id" />
+                <ScalarProperty Name="member_id" ColumnName="member_id" />
+                <ScalarProperty Name="role_id" ColumnName="role_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="roles">
+            <EntityTypeMapping TypeName="digitalretailersincModel.role">
+              <MappingFragment StoreEntitySet="role">
+                <ScalarProperty Name="role_id" ColumnName="role_id" />
+                <ScalarProperty Name="role_name" ColumnName="role_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="shipping_details">
+            <EntityTypeMapping TypeName="digitalretailersincModel.shipping_details">
+              <MappingFragment StoreEntitySet="shipping_details">
+                <ScalarProperty Name="shipping_detail_id" ColumnName="shipping_detail_id" />
+                <ScalarProperty Name="member_id" ColumnName="member_id" />
+                <ScalarProperty Name="adress" ColumnName="adress" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="state_is" ColumnName="state_is" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="zipcode" ColumnName="zipcode" />
+                <ScalarProperty Name="order_id" ColumnName="order_id" />
+                <ScalarProperty Name="amount_paid" ColumnName="amount_paid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="slide_image">
+            <EntityTypeMapping TypeName="digitalretailersincModel.slide_image">
+              <MappingFragment StoreEntitySet="slide_image">
+                <ScalarProperty Name="slide_id" ColumnName="slide_id" />
+                <ScalarProperty Name="slide_title" ColumnName="slide_title" />
+                <ScalarProperty Name="slide_image1" ColumnName="slide_image1" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

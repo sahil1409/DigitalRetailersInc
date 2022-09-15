@@ -1,0 +1,111 @@
+﻿@using DigitalRetailersInc.Models.Home;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - DigitalRetailersInc</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href=" ~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/DigitalRetailersInc.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Content/MyMainLayOut.css" />
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <div class="logo">
+                    <h1><a href="#">Digital Retailers Inc</a></h1>
+                    <h2><span>The Laptop Shop</span></h2>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">Cart(3) <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            @if (Session["cart"] != null)
+                            {
+                                foreach (Item item in (List<Item>)Session["cart"])
+                                {
+
+                                    <li>
+                                        <a href="@Url.Action("RemoveFromCart", "Home", new { productId=item.Product.laptop_id})">@item.Product.laptop_name (@item.Quantity) <i class="fa fa-times"></i></a>
+                                    </li>
+                                }
+                            }
+                            <li class="divider"></li>
+                            <li><a href="../Home/Checkout">Checkout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-md-12">
+                <div id="nav-menus">
+
+                    <ul class="nav nav-pills">
+                        <li class="link active"><a style="border-radius:5px;" href="../Home">Home</a></li>
+                        <li class="link"><a style="border-radius:5px;" href="#">Location</a></li>
+                        <li class="link"><a style="border-radius:5px;" href="#">About</a></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+
+        @RenderBody()
+        <hr />
+        <footer>
+            <div class="row">
+                <div class="col-md-12 copyright">
+
+                    <div class="col-md-6 col-sm-6 copyright-left">
+                        <p>&copy; @DateTime.Now.Year - DigitalRetailersInc. All right reserved.</p>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6 copyright-right">
+
+                        <ul class="list-unstyled list-social">
+                            <li><a href="#" target="_blank"><i class="fa fa-facebook-square"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </footer>
+    </div>
+
+    <script>
+        // Add active class to the current button (highlight it)
+        var header = document.getElementById("nav-menus");
+        var list = header.getElementsByClassName("link");
+        for (var i = 0; i < list.length; i++) {
+            list[i].addEventListener("click", function () {
+                var current = document.getElementsByClassName("active");
+                if (current.length > 0) {
+                    current[0].className = current[0].className.replace(" active", "");
+                }
+                this.className += " active";
+            });
+        }
+    </script>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+</body>
+</html>
